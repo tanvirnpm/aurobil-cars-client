@@ -5,7 +5,6 @@ import Register from "./Pages/Register/Register";
 import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 import Purchase from "./Pages/Purchase/Purchase";
 import NotFount from "./Pages/NotFount/NotFount";
-import StockList from "./Pages/Shared/StockList/StockList";
 function App() {
   return (
     <Router>
@@ -19,9 +18,9 @@ function App() {
         <Route path="/dashboard">
           <Dashboard />
         </Route>
-        <Route path="/stock-list">
+        {/* <Route path="/stock-list">
           <StockList />
-        </Route>
+        </Route> */}
         <Route path="/login">
           <Login />
         </Route>

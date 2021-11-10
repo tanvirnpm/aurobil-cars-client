@@ -5,10 +5,8 @@ import { Link } from 'react-router-dom';
 const SmallSearchPanel = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
-
-    console.log(watch("example"));
     return (
-        <div className="bg-white border rounded py-3 px-5 shadow-sm">
+        <div className="bg-white border rounded py-3 px-4 shadow-sm">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <select className="form-control mb-2" {...register("make")}>
                     <option selected>Make</option>
@@ -33,6 +31,14 @@ const SmallSearchPanel = () => {
                     <option value="Blue">Blue</option>
                     <option value="Black">Black</option>
                 </select>
+                <div className="row">
+                    <div className="col-md-6">
+                        <input type="text" className="form-control mb-2" placeholder="Min Price" {...register("minPrice")} />
+                    </div>
+                    <div className="col-md-6">
+                        <input type="text" className="form-control mb-2" placeholder="Max Price" {...register("maxPrice")} />
+                    </div>
+                </div>
 
 
                 <div className="d-flex justify-content-between align-items-center">
