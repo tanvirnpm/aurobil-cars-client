@@ -47,8 +47,8 @@ const Footer = () => {
                     <div className="col-md-6">
                         <ul className="list-inline text-md-end text-center">
                             <li className="list-inline-item"><i className="fa-brands fa-facebook-square"></i></li>
-                            <li className="list-inline-item"><i class="fa-brands fa-youtube"></i></li>
-                            <li className="list-inline-item"><i class="fa-brands fa-twitter-square"></i></li>
+                            <li className="list-inline-item"><i className="fa-brands fa-youtube"></i></li>
+                            <li className="list-inline-item"><i className="fa-brands fa-twitter-square"></i></li>
                         </ul>
                     </div>
                 </div>

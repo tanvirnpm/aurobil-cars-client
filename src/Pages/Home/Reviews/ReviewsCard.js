@@ -8,7 +8,7 @@ const ReviewsCard = ({review}) => {
   return (
     <div className="col-md-4">
       <div className="card shadow-sm text-center my-3 mx-2">
-        <img style={clientImage} src={image} class="card-img-top" alt=""/>
+        <img style={clientImage} src={image} className="card-img-top" alt=""/>
         <div className="card-body">
           <h5 className="card-title">{title}</h5>
           

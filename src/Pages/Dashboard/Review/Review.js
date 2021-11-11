@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import DashboardMenu from '../Dashboard/DashboardMenu';
 import { useForm } from "react-hook-form";
 
 
 const Review = () => {
+    const [review, setReview] = useState({})
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => setReview(data);
+    console.log(review)
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
                 <DashboardMenu />
                 <div className="col py-3">
-                    <h3>Review integration comming soon...</h3>
+                    <h3>Add a Review</h3>
                     <div className="row mt-4">
                         <div className="col-md-8">
                             <form onSubmit={handleSubmit(onSubmit)}>
