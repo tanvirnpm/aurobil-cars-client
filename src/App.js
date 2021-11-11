@@ -5,6 +5,15 @@ import Register from "./Pages/Register/Register";
 import Dashboard from "./Pages/Dashboard/Dashboard/Dashboard";
 import Purchase from "./Pages/Purchase/Purchase";
 import NotFount from "./Pages/NotFount/NotFount";
+import Pay from "./Pages/Dashboard/Pay/Pay";
+import MyOrders from "./Pages/Dashboard/MyOrders/MyOrders";
+import Review from "./Pages/Dashboard/Review/Review";
+import ManageAllOrders from "./Pages/Dashboard/Admin/ManageAllOrders/ManageAllOrders";
+import AddAProducts from "./Pages/Dashboard/Admin/AddAProducts/AddAProducts";
+import ManageProducts from "./Pages/Dashboard/Admin/ManageProducts/ManageProducts";
+import ManageAdmin from "./Pages/Dashboard/Admin/ManageAdmin/ManageAdmin";
+import StockList from "./Pages/StockList/StockList";
+import ProductDetasils from "./Pages/ProductDetasils/ProductDetasils";
 function App() {
   return (
     <Router>
@@ -18,9 +27,9 @@ function App() {
         <Route path="/dashboard">
           <Dashboard />
         </Route>
-        {/* <Route path="/stock-list">
+        <Route path="/stock-list">
           <StockList />
-        </Route> */}
+        </Route>
         <Route path="/login">
           <Login />
         </Route>
@@ -29,6 +38,30 @@ function App() {
         </Route>
         <Route path="/purchase">
           <Purchase />
+        </Route>
+        <Route path="/pay">
+          <Pay />
+        </Route>
+        <Route path="/my-orders">
+          <MyOrders />
+        </Route>
+        <Route path="/review">
+          <Review />
+        </Route>
+        <Route path="/manage-all-orders">
+          <ManageAllOrders />
+        </Route>
+        <Route path="/add-a-product">
+          <AddAProducts />
+        </Route>
+        <Route path="/manage-product">
+          <ManageProducts />
+        </Route>
+        <Route path="/product-details">
+          <ProductDetasils />
+        </Route>
+        <Route path="/make-admin">
+          <ManageAdmin />
         </Route>
         <Route path="*">
           <NotFount/>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const RecentCarsCard = () => {
   return (
@@ -19,9 +20,9 @@ const RecentCarsCard = () => {
             <span className="badge bg-info text-white">Blue</span>
           </div>
           <div className="d-flex justify-content-center">
-            <button className="btn btn-outline-info btn-sm me-2">
+            <Link to="/product-details" className="btn btn-outline-info btn-sm me-2">
               View Details
-            </button>
+            </Link>
             <button className="btn btn-outline-info btn-sm">
               Purchase Now
             </button>
