@@ -90,7 +90,7 @@ const AddAProducts = () => {
                                 </div>
 
                                 <div className="text-end mt-3">
-                                    <input type="submit" value="Add A Product" className="btn btn-lg btn-outline-info" />
+                                    <button type="submit" className="btn btn-lg btn-outline-info">Add A Product</button>
                                 </div>
                             </form>
                         </div>
