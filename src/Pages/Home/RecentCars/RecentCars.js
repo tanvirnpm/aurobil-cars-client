@@ -4,7 +4,7 @@ import RecentCarsCard from "./RecentCarsCard";
 const RecentCars = () => {
   return (
     <section className="container py-4">
-      <h1 className="mb-4">Recent Car's</h1>
+      <h1 className="mb-4 text-center text-md-start">Recent Car's</h1>
       <div className="row g-3">
         <RecentCarsCard />
         <RecentCarsCard />
