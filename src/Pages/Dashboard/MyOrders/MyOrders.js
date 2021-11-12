@@ -5,12 +5,26 @@ import DashboardMenu from '../Dashboard/DashboardMenu';
 const MyOrders = () => {
     const { user } = useAuth();
     const [myOrders, setMyOrders] = useState([])
+    const [deleteItem, setDeleteItem] = useState([])
     useEffect(()=>{
         fetch(`http://localhost:5000/get-order/${user.email}`)
         .then(result => result.json())
         .then(data => setMyOrders(data))
     },[])
-    
+    const deleteItemById = (id) => {
+        setDeleteItem(id);
+    }
+    const orderDeleteById = id => {
+        fetch(`http://localhost:5000/delete-order/${id}`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>console.log(data))
+    }
+    console.log(deleteItem)
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -40,7 +54,7 @@ const MyOrders = () => {
                                     <td>{item.car.color}</td>
                                     <td>{item.car.price} /-</td>
                                     <td>{item.status}</td>
-                                    {item.status == 'Pending' && <td><button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>}
+                                    {item.status == 'Pending' && <td><button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal" onClick={()=>deleteItemById(item._id)}>Delete</button></td>}
                                 </tr>)
                             }
                         </tbody>
@@ -60,7 +74,7 @@ const MyOrders = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-danger">Confirm Delete</button>
+                            <button type="button" className="btn btn-danger" onClick={()=> orderDeleteById(deleteItem)}>Confirm Delete</button>
                         </div>
                     </div>
                 </div>
