@@ -14,60 +14,65 @@ import ManageProducts from "./Pages/Dashboard/Admin/ManageProducts/ManageProduct
 import ManageAdmin from "./Pages/Dashboard/Admin/ManageAdmin/ManageAdmin";
 import StockList from "./Pages/StockList/StockList";
 import ProductDetasils from "./Pages/ProductDetasils/ProductDetasils";
+import AuthProvider from "./contexts/AuthProvider/AuthProvider";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
+import AdminPrivateRoute from "./AdminPrivateRoute/AdminPrivateRoute";
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/home">
-          <Home />
-        </Route>
-        <Route path="/dashboard">
-          <Dashboard />
-        </Route>
-        <Route path="/stock-list">
-          <StockList />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/register">
-          <Register />
-        </Route>
-        <Route path="/purchase">
-          <Purchase />
-        </Route>
-        <Route path="/pay">
-          <Pay />
-        </Route>
-        <Route path="/my-orders">
-          <MyOrders />
-        </Route>
-        <Route path="/review">
-          <Review />
-        </Route>
-        <Route path="/manage-all-orders">
-          <ManageAllOrders />
-        </Route>
-        <Route path="/add-a-product">
-          <AddAProducts />
-        </Route>
-        <Route path="/manage-product">
-          <ManageProducts />
-        </Route>
-        <Route path="/product-details">
-          <ProductDetasils />
-        </Route>
-        <Route path="/make-admin">
-          <ManageAdmin />
-        </Route>
-        <Route path="*">
-          <NotFount/>
-        </Route>
-      </Switch>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/home">
+            <Home />
+          </Route>
+          <PrivateRoute path="/dashboard">
+            <Dashboard />
+          </PrivateRoute>
+          <Route path="/stock-list">
+            <StockList />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <PrivateRoute path="/purchase">
+            <Purchase />
+          </PrivateRoute>
+          <PrivateRoute path="/pay">
+            <Pay />
+          </PrivateRoute>
+          <PrivateRoute path="/my-orders">
+            <MyOrders />
+          </PrivateRoute>
+          <PrivateRoute path="/review">
+            <Review />
+          </PrivateRoute>
+          <AdminPrivateRoute path="/manage-all-orders">
+            <ManageAllOrders />
+          </AdminPrivateRoute>
+          <AdminPrivateRoute path="/add-a-product">
+            <AddAProducts />
+          </AdminPrivateRoute>
+          <AdminPrivateRoute path="/manage-product">
+            <ManageProducts />
+          </AdminPrivateRoute>
+          <Route path="/product-details">
+            <ProductDetasils />
+          </Route>
+          <AdminPrivateRoute path="/make-admin">
+            <ManageAdmin />
+          </AdminPrivateRoute>
+          <Route path="*">
+            <NotFount/>
+          </Route>
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 

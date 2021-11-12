@@ -6,7 +6,15 @@ import { useForm } from "react-hook-form";
 const Review = () => {
     const [review, setReview] = useState({})
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => setReview(data);
+    const onSubmit = data => {
+        fetch('http://localhost:5000/add-review',{
+            method: "POST",
+            headers: {'content-type': 'application/json'},
+            body: JSON.stringify(data)
+        })
+        .then(result=> result.json())
+        .then(data => console.log(data))
+    };
     console.log(review)
     return (
         <div className="container-fluid">

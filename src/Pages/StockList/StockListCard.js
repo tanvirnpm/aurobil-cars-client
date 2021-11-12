@@ -23,9 +23,9 @@ const StockListCard = () => {
                         <Link to="/product-details" className="btn btn-outline-info btn-sm me-2">
                             View Details
                         </Link>
-                        <button className="btn btn-outline-info btn-sm">
+                        <Link to="/purchase" className="btn btn-outline-info btn-sm">
                             Purchase Now
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </div>

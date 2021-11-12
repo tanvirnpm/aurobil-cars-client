@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
+    const { user } = useAuth();
+    console.log('context user', user)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -23,19 +26,19 @@ const Navbar = () => {
                         <li className="nav-item">
                             <Link className="nav-link" to="/contact-us">Contact Us</Link>
                         </li>
-                        <li className="nav-item">
+                        {user.email && <li className="nav-item">
                             <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                        </li>
+                        </li>}
                         {/* <li className="nav-item">
                             <Link className="nav-link" to="/stock-list">Stock List</Link>
                         </li> */}
                     </ul>
                 <div className="navbar-nav">
-                    <div className="d-flex align-items-center mb-3 mb-md-0 justify-content-center">
-                        <img style={{height: '40px', width: '40px', borderRadius: '50%'}} src="https://webtoolfeed.files.wordpress.com/2011/12/1.jpg" alt="" />
-                        <span className="mx-3"><i>Tanvir Ahammed</i></span>
-                    </div>
-                    <Link to="/login" className="btn btn-outline-info">Login</Link>
+                    {user?.email && <div className="d-flex align-items-center mb-3 mb-md-0 justify-content-center">
+                        <img style={{height: '40px', width: '40px', borderRadius: '50%'}} src={user?.image} alt="" />
+                        <span className="mx-3"><i>{user?.name}</i></span>
+                    </div>}
+                    {user?.email ? <button className="btn btn-outline-danger">Logout</button> : <Link to="/login" className="btn btn-outline-info">Login</Link>}
                     {/* <Link className="btn btn-outline-danger">Logout</Link> */}
                 </div>
                 </div>

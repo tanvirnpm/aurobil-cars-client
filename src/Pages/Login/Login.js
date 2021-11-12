@@ -1,36 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
+    const { loginUser } = useAuth();
+    const location = useLocation();
+    const history = useHistory();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        loginUser(data.email, data.password, location , history)
+    };
     return (
-        <div class="container">
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-4">
-                    <div class="login-form bg-light mt-4 p-4 shadow">
-                        <form onSubmit={handleSubmit(onSubmit)} class="row g-3">
+        <div className="container">
+            <div className="row justify-content-center mt-5">
+                <div className="col-md-4">
+                    <div className="login-form bg-light mt-4 p-4 shadow">
+                        <form onSubmit={handleSubmit(onSubmit)} className="row g-3">
                             <h4 className="text-center"><Link to="/" className="text-info text-decoration-none">Aurobil Car's</Link></h4>
-                            <div class="col-12">
+                            <div className="col-12">
                                 <label>Email</label>
-                                <input type="email" {...register("email")} class="form-control" placeholder="Email"/>
+                                <input type="email" {...register("email")} className="form-control" placeholder="Email"/>
                             </div>
-                            <div class="col-12">
+                            <div className="col-12">
                                 <label>Password</label>
-                                <input type="password" {...register("password")} class="form-control" placeholder="Password"/>
+                                <input type="password" {...register("password")} className="form-control" placeholder="Password"/>
                             </div>
-                            <div class="col-12">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="rememberMe"/>
+                            <div className="col-12">
+                                <div className="form-check">
+                                    <input className="form-check-input" type="checkbox" id="rememberMe"/>
                                     <label class ="form-check-label" for="rememberMe"> Remember me</label>
                                 </div>
                             </div>
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-info float-end">Login</button>
+                            <div className="col-12">
+                                <button type="submit" className="btn btn-info float-end">Login</button>
                             </div>
                         </form>
-                        <hr class="mt-4"/>
+                        <hr className="mt-4"/>
                         <div class ="col-12">
                         <p class ="text-center mb-0">Have not account yet? <Link to="/register">Signup</Link></p>
                         </div>
