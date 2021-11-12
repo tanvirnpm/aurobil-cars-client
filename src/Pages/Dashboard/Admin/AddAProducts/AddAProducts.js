@@ -1,22 +1,38 @@
 import React, { useState } from 'react';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 import { useForm } from "react-hook-form";
+import useAuth from '../../../../hooks/useAuth';
 
 const AddAProducts = () => {
-    const [addCar, setAddCar] = useState({})
+    const { user } = useAuth();
 
     const carSpecifications = {
         make: ['Toyota', 'Nissan', 'Honda', 'Mazda'],
-        model: ['Corolla Axio', 'Corolla Fielder', 'Aqua', 'Premio', 'Allion', 'X-Trail', 'Axela'],
-        package: ['G', 'X', 'G Plus', 'S Touring', 'A Touring'],
-        color: ['Red Wine', 'Wine', 'Black', 'White', 'Pearl', 'Blue', 'Mica Blue'],
+        model: ['Corolla Axio', 'Corolla Fielder', 'Aqua', 'Premio', 'Allion', 'X-Trail', 'Axela', 'LAND CRUISER PRADO'],
+        package: ['G', 'X', 'G Plus', 'S Touring', 'A Touring', 'TX L PACKAGE', 'Emergency Brake Package'],
+        color: ['Red Wine', 'Silver', 'Orange', 'Wine', 'Black', 'White', 'Pearl', 'Blue', 'Mica Blue'],
         year: [2016,2017,2018,2019,2020,2021,2020],
-        fuelType: ['Hybrid', 'Non Hybrid']
+        fuelType: ['Hybrid', 'Non Hybrid'],
+        grade: [5,4.5,4,3.5,3,'R','RA']
     }
     
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => setAddCar(data);
-    console.log(addCar)
+    const onSubmit = data => {
+        const newCar = data;
+        newCar.addedBy = {
+            email: user.email,
+            name: user.name
+        };
+        fetch('http://localhost:5000/add-product',{
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newCar)
+        })
+        .then(result => result.json())
+        .then(data=>console.log('after added product', data))
+    };
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -72,6 +88,14 @@ const AddAProducts = () => {
                                             <option selected>Select Fuel</option>
                                             {
                                                 carSpecifications.fuelType.map(item=><option value={item}>{item}</option>)
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className="col-lg-3 col-md-4 col-sm-6">
+                                        <select className="form-select" {...register("grade")}>
+                                            <option selected>Select Grade</option>
+                                            {
+                                                carSpecifications.grade.map(item=><option value={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>

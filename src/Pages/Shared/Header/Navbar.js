@@ -4,7 +4,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
     const { user } = useAuth();
-    console.log('context user', user)
+    // console.log('context user', user)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">

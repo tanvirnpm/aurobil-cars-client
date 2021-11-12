@@ -1,38 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 
 const ManageAllOrders = () => {
-    const orderData = [
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-    ]
-    // setMyOrders(orderData)
+    const [orders, setOrders] = useState([]);
+    useEffect(()=>{
+        fetch('http://localhost:5000/get-all-orders')
+        .then(res=> res.json())
+        .then(data => setOrders(data))
+    },[])
+    // order status change to shipped
+    const orderShipped = id => {
+        fetch(`http://localhost:5000/order/shipped/${id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(result => console.log(result))
+    }
+    console.log(orders)
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -43,26 +30,24 @@ const ManageAllOrders = () => {
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Chassis Number</th>
-                                <th scope="col">Car Name</th>
-                                <th scope="col">Year</th>
-                                <th scope="col">Color</th>
+                                <th scope="col">Client Information</th>
+                                <th scope="col">Vehicle Information</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                orderData.map((item,index)=> <tr key={index}>
+                                orders.map((item,index)=> <tr key={index}>
                                     <th>{index+1}</th>
-                                    <td>{item.chassis}</td>
-                                    <td>{item.make} {item.model}</td>
-                                    <td>{item.year}</td>
-                                    <td>{item.color}</td>
-                                    <td>Pending</td>
+                                    <td>{item.name}, {item.email}, {item.contact}, {item.address}</td>
+                                    <td>{item.car.make} {item.car.model} {item.car.fuelType}, {item.car.year}, {item.car.color}</td>
+                                    <td>{item.car.price} /-</td>
+                                    <td>{item.status}</td>
                                     <td>
-                                        <button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
-                                        <button className="btn btn-info btn-sm ms-1" data-bs-toggle="modal" data-bs-target="#confirmModal">Shipped</button>
+                                        {item.status == 'Pending' && <button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>}
+                                        {item.status == 'Pending' && <button onClick={()=> orderShipped(item._id)} className="btn btn-info btn-sm ms-1">Shipped</button>}
                                     </td>
                                 </tr>)
                             }

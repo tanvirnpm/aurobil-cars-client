@@ -8,10 +8,20 @@ const ManageAdmin = () => {
         .then(res=> res.json())
         .then(data => setAllUsers(data))
     },[])
-    console.log('from mongodb: ', allUsers)
+    // console.log('from mongodb: ', allUsers)
     
+    // make admin
+    const makeAdmin = email => {
+        fetch(`http://localhost:5000/make/admin/${email}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(result => console.log(result))
+    }
     
-    // setMyOrders(orderData)
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -35,35 +45,16 @@ const ManageAdmin = () => {
                                     <td>{item.name}</td>
                                     <td>{item.email}</td>
                                     <td>
-                                        {item.user && 'Normal User'}
+                                        {item.user && 'Member'}
                                         {item.admin && 'Admin'}
                                     </td>
                                     <td>
-                                        { item.user && <button className="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Make Admin</button>}
-                                        { item.admin && item.email != 'admin@admin.com' && <button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>}
+                                        { item.user && <button onClick={()=>makeAdmin(item.email)} className="btn btn-info btn-sm">Make Admin</button>}
                                     </td>
                                 </tr>)
                             }
                         </tbody>
                     </table>
-                </div>
-            </div>
-            {/* confirm modal */}
-            <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
-                    <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Toyota Allion</h5>
-                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div className="modal-body">
-                            ...
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-danger">Confirm Delete</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

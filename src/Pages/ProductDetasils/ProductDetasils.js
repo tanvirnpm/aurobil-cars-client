@@ -1,20 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import Footer from '../Shared/Footer/Footer';
 import Navbar from '../Shared/Header/Navbar';
 import SimilarCarsCard from './SimilarCarsCard';
 
 const ProductDetasils = () => {
+    const [product, setProduct]= useState([]);
+    const {make, model, price, image, grade, mileage, fuelType, year, color} = product;
+    const { chassis } = useParams();
+    useEffect(()=>{
+        fetch(`http://localhost:5000/get-product/${chassis}`)
+        .then(res=> res.json())
+        .then(data=> setProduct(data[0]));
+    },[])
+    console.log(product.package)
     return (
         <div>
             <Navbar />
             <div className="container my-5">
-                <h1 className="text-center border bg-info rounded-pill mb-4">Toyota C-HR</h1>
+                <h1 className="text-center border bg-info rounded-pill mb-4">{make} {model}</h1>
                 <div className="row">
                     <div className="col-md-6">
-                        <img className="img-fluid" src="https://global.toyota/pages/models/images/20191018/kv/c-hr_ogp_01.jpg" alt="" />
+                        <img style={{height: '400px'}} className="img-fluid" src={image} alt="" />
                     </div>
                     <div className="col-md-6">
-                        <h4>Price: 34,00,000 /-</h4>
+                        <h4>Price: {price} /-</h4>
                         <hr />
                         <div className="row">
                             <div className="col">
@@ -32,21 +43,23 @@ const ProductDetasils = () => {
                             </div>
                             <div className="col">
                                 <ul className="list-unstyled mb-0">
-                                    <li>Toyota</li>
-                                    <li>Esquire</li>
-                                    <li>GI Premium Package</li>
-                                    <li>Hybrid</li>
-                                    <li>4</li>
-                                    <li>2018</li>
-                                    <li>10,825 km</li>
-                                    <li>Purple</li>
-                                    <li>ZWR80-0349917</li>
+                                    <li>{make}</li>
+                                    <li>{model}</li>
+                                    <li>{product.package}</li>
+                                    <li>{fuelType}</li>
+                                    <li>{grade}</li>
+                                    <li>{year}</li>
+                                    <li>{mileage} km</li>
+                                    <li>{color}</li>
+                                    <li>{chassis}</li>
                                 </ul>
                             </div>
                         </div>
                         <hr />
                         <div className="text-end">
-                            <button className="btn btn-outline-info btn-lg">Purchase Now</button>
+                        <Link to={`/purchase/${chassis}`} className="btn btn-outline-info">
+                            Purchase Now
+                        </Link>
                         </div>
                     </div>
                 </div>

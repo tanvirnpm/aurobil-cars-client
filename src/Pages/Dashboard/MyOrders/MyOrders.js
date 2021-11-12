@@ -1,39 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useAuth from '../../../hooks/useAuth';
 import DashboardMenu from '../Dashboard/DashboardMenu';
 
 const MyOrders = () => {
-    // const [myOrders, setMyOrders] = useState({})
-    const orderData = [
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-    ]
-    // setMyOrders(orderData)
+    const { user } = useAuth();
+    const [myOrders, setMyOrders] = useState([])
+    useEffect(()=>{
+        fetch(`http://localhost:5000/get-order/${user.email}`)
+        .then(result => result.json())
+        .then(data => setMyOrders(data))
+    },[])
+    
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -48,20 +25,22 @@ const MyOrders = () => {
                                 <th scope="col">Car Name</th>
                                 <th scope="col">Year</th>
                                 <th scope="col">Color</th>
+                                <th scope="col">Price</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                orderData.map((item, index) => <tr key={index}>
+                                myOrders.map((item, index) => <tr key={index}>
                                     <th>{index + 1}</th>
-                                    <td>{item.chassis}</td>
-                                    <td>{item.make} {item.model}</td>
-                                    <td>{item.year}</td>
-                                    <td>{item.color}</td>
-                                    <td>Pending</td>
-                                    <td><button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>
+                                    <td>{item.car.chassis}</td>
+                                    <td>{item.car.make} {item.model}</td>
+                                    <td>{item.car.year}</td>
+                                    <td>{item.car.color}</td>
+                                    <td>{item.car.price} /-</td>
+                                    <td>{item.status}</td>
+                                    {item.status == 'Pending' && <td><button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button></td>}
                                 </tr>)
                             }
                         </tbody>

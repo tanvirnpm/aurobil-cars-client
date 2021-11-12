@@ -40,7 +40,7 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <PrivateRoute path="/purchase">
+          <PrivateRoute path="/purchase/:chassis">
             <Purchase />
           </PrivateRoute>
           <PrivateRoute path="/pay">
@@ -61,7 +61,7 @@ function App() {
           <AdminPrivateRoute path="/manage-product">
             <ManageProducts />
           </AdminPrivateRoute>
-          <Route path="/product-details">
+          <Route path="/product-details/:chassis">
             <ProductDetasils />
           </Route>
           <AdminPrivateRoute path="/make-admin">

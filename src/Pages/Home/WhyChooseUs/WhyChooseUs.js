@@ -18,7 +18,7 @@ const WhyChooseUs = () => {
     {
       title: "Fast & easy financing",
       description:
-        "At Link Motors, we believe everyone deserves vehicle financing. We work with all types of credit from good to average to bad. With the Link Motors FAST AND EASY...",
+        "At Link Motors, we believe everyone deserves vehicle financing. We work with all types of credit from good to average to bad. With the Link...",
       image: "fa-solid fa-comments-dollar",
     },
   ];
