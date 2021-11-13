@@ -1,19 +1,31 @@
 import initializeFirebase from '../Pages/Login/firebase.init';
-import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword, signOut } from "firebase/auth";
+import { useEffect, useState } from 'react';
 
 initializeFirebase();
 const useFirebase = () => {
-    const [user, setUser] = useState({
-        name: '',
-        email: '',
-        admin: false,
-        user: false
-    })
+    const [user, setUser] = useState({})
+    useEffect(() => {
+        const getLocalStorageUser = JSON.parse(localStorage.getItem("loginUser"));
+        // console.log(getLocalStorageUser);
+        getLocalStorageUser && setUser(getLocalStorageUser)
+      }, []);
 
 
     const auth = getAuth();
-
+    //   sign out function
+    const logOutHandler = () => {
+        signOut(auth)
+          .then(() => {
+            // Sign-out successful.
+            setUser({});
+            localStorage.removeItem("loginUser");
+          })
+          .catch((error) => {
+            // An error happened.
+          });
+          console.log('logout done')
+      };
 
     // user registration by email and password
     const registerUser = (email, password, name, history) => {
@@ -63,6 +75,7 @@ const useFirebase = () => {
                         user: data[0].user,
                         image: data[0].image,
                     })
+                    savedUserInToLocalStorage(data[0].email, data[0].name, data[0].user, data[0].admin)
                     data[0]?.email && history.replace(from)
                 })
             })
@@ -92,6 +105,17 @@ const useFirebase = () => {
             .then(result => result.json())
             .then(data => console.log(data))
     }
+    // saved user into localstorage
+    const savedUserInToLocalStorage = (email, name, userRole, adminRole) => {
+        const user = JSON.stringify({ 
+            email: email, 
+            name: name,  
+            user: userRole,
+            admin: adminRole,
+            image: 'https://image.flaticon.com/icons/png/512/206/206853.png'
+        });
+        localStorage.setItem("loginUser", user);
+    }
 
 
 
@@ -103,9 +127,11 @@ const useFirebase = () => {
 
 
     return {
+        logOutHandler,
         registerUser,
         loginUser,
         user,
+        savedUserInToLocalStorage,
     }
 };
 

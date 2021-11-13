@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const DashboardMenu = () => {
-    const { user } = useAuth();
+    const { user, logOutHandler } = useAuth();
     return (
         <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-light">
             <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
@@ -44,7 +44,7 @@ const DashboardMenu = () => {
                             <i className="fs-4 bi-people"></i> <span className="ms-1 d-none d-sm-inline">Make Admin</span> </Link>
                     </li>}
                     <li className="nav-link px-0 align-middle">
-                        <i className="fs-4 bi-box-arrow-left"></i> <span className="ms-1 d-none d-sm-inline">Logout</span>
+                        <i className="fs-4 bi-box-arrow-left"></i> <span className="ms-1 d-none d-sm-inline" onClick={logOutHandler} style={{cursor: 'pointer'}}>Logout</span>
                     </li>
                 </ul>
             </div>

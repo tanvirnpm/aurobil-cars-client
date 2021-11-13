@@ -1,38 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 
 const ManageProducts = () => {
-    const orderData = [
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-        {
-            chassis: 'NKE165-5685847',
-            make: 'Toyota',
-            model: 'Axio',
-            color: 'Silver',
-            year: 2017
-        },
-    ]
-    // setMyOrders(orderData)
+    const [products, setProducts] = useState([]);
+    const [deleteItem, setDeleteItem] = useState([])
+    useEffect(()=>{
+        fetch('http://localhost:5000/get-all-products')
+        .then(res=>res.json())
+        .then(data=>setProducts(data))
+    },[])
+    // get delete product id
+    const deleteItemById = (id) => {
+        setDeleteItem(id);
+    }
+    // products delete function
+    const productDeleteById = id => {
+        fetch(`http://localhost:5000/delete-product/${id}`, {
+            method: "POST",
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res=>res.json())
+        .then(data=>console.log(data))
+    }
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -52,14 +43,14 @@ const ManageProducts = () => {
                         </thead>
                         <tbody>
                             {
-                                orderData.map((item,index)=> <tr key={index}>
+                                products.map((item,index)=> <tr key={index}>
                                     <th>{index+1}</th>
                                     <td>{item.chassis}</td>
                                     <td>{item.make} {item.model}</td>
                                     <td>{item.year}</td>
                                     <td>{item.color}</td>
                                     <td>
-                                        <button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                                        <button onClick={()=>deleteItemById(item._id)} className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
                                     </td>
                                 </tr>)
                             }
@@ -80,7 +71,7 @@ const ManageProducts = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-danger">Confirm Delete</button>
+                            <button onClick={()=> productDeleteById(deleteItem)} type="button" className="btn btn-danger">Confirm Delete</button>
                         </div>
                     </div>
                 </div>

@@ -4,13 +4,17 @@ import { useForm } from "react-hook-form";
 import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
+    const {user} = useAuth();
     const { loginUser } = useAuth();
     const location = useLocation();
     const history = useHistory();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
-        loginUser(data.email, data.password, location , history)
+        loginUser(data.email, data.password, location , history);
     };
+    // redirect if already logged user
+    let { from } = location.state || { from: { pathname: "/" } };
+    user?.email && history.replace(from)
     return (
         <div className="container">
             <div className="row justify-content-center mt-5">

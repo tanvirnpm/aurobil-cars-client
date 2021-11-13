@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 const Navbar = () => {
-    const { user } = useAuth();
-    // console.log('context user', user)
+    const { user, logOutHandler } = useAuth();
+    // console.log('context user:', logOutHandler)
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -38,7 +38,7 @@ const Navbar = () => {
                         <img style={{height: '40px', width: '40px', borderRadius: '50%'}} src={user?.image} alt="" />
                         <span className="mx-3"><i>{user?.name}</i></span>
                     </div>}
-                    {user?.email ? <button className="btn btn-outline-danger">Logout</button> : <Link to="/login" className="btn btn-outline-info">Login</Link>}
+                    {user?.email ? <button className="btn btn-outline-danger" onClick={logOutHandler}>Logout</button> : <Link to="/login" className="btn btn-outline-info">Login</Link>}
                     {/* <Link className="btn btn-outline-danger">Logout</Link> */}
                 </div>
                 </div>
