@@ -3,38 +3,47 @@ import Footer from '../Shared/Footer/Footer';
 import Navbar from '../Shared/Header/Navbar';
 import { useForm } from "react-hook-form";
 import useAuth from '../../hooks/useAuth';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
+import './Purchase.css'
 
 const Purchase = () => {
-    const {user} = useAuth();
-    const [product, setProduct]= useState([]);
+    const { user } = useAuth();
+    const [product, setProduct] = useState([]);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const {make, model, price, image, grade, mileage, fuelType, year, color} = product;
+    const { make, model, price, image, grade, mileage, fuelType, year, color } = product;
+    const [isOrderSuccess, setIsOrderSuccess] = useState(false);
     const { chassis } = useParams();
-    useEffect(()=>{
+    const history = useHistory()
+    useEffect(() => {
         fetch(`https://intense-dawn-68409.herokuapp.com/get-product/${chassis}`)
-        .then(res=> res.json())
-        .then(data=> setProduct(data[0]));
-    },[])
+            .then(res => res.json())
+            .then(data => setProduct(data[0]));
+    }, [])
     // console.log(product)
     const onSubmit = data => {
         const newOrder = data;
         newOrder.car = product;
         newOrder.status = 'Pending';
-        fetch('https://intense-dawn-68409.herokuapp.com/make-order',{
+        fetch('https://intense-dawn-68409.herokuapp.com/make-order', {
             method: "POST",
-            headers: {'content-type': 'application/json'},
+            headers: { 'content-type': 'application/json' },
             body: JSON.stringify(data)
         })
-        .then(result=> result.json())
-        .then(data => console.log(data))
+            .then(result => result.json())
+            .then(data => {
+                const success = data.acknowledged;
+                setIsOrderSuccess(success);
+            })
         // console.log(data)
     };
+    const redirectToOrder = () => {
+        history.replace('/my-orders')
+    }
     return (
         <div>
             <Navbar />
             <div className="container my-5">
-            <h1 className="text-center border bg-info rounded-pill mb-4">{make} {model}</h1>
+                <h1 className="text-center border bg-info rounded-pill mb-4">{make} {model}</h1>
                 <div className="row">
                     <div className="col-md-6">
                         <img style={{ height: '400px' }} className="img-fluid" src={image} alt="" />
@@ -82,6 +91,24 @@ const Purchase = () => {
                                 <input type="submit" value="Place on Order" className="btn btn-lg btn-outline-info" />
                             </div>
                         </form>
+                    </div>
+                </div>
+            </div>
+            <span id="success-btn" data-bs-toggle="modal" data-bs-target="#successModal"></span>
+            {
+                isOrderSuccess && document.getElementById('success-btn').click()
+            }
+            {/* success order modal */}
+            <div onClick={redirectToOrder} className="success modal fade" id="successModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="card">
+                        <div className="card-img iconSuccess"> <i className="bi bi-check-circle"></i> </div>
+                        <div className="card-title">
+                            <p>Success!</p>
+                        </div>
+                        <div className="card-text">
+                            <p>Yay! It's a nice order! <br />It will arrive soon.</p>
+                        </div> <button className="btn">Track delivery</button>
                     </div>
                 </div>
             </div>

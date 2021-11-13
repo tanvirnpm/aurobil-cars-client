@@ -1,0 +1,70 @@
+.success .card {
+    border-radius: 3vh;
+    margin: auto;
+    max-width: 380px;
+    padding: 7vh 6vh;
+    align-items: center;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19)
+}
+
+@media(max-width:767px) {
+    .card {
+        width: 90vw
+    }
+}
+
+.success .card-img {
+    padding: 20px 0;
+    width: 40%
+}
+
+.success .card-img img {
+    opacity: 0.7
+}
+
+.success .card-title {
+    margin-bottom: unset
+}
+
+.success .card-title p {
+    color: rgb(29, 226, 226);
+    font-weight: 900;
+    font-size: 30px;
+    margin-bottom: unset
+}
+
+.success .card-text p {
+    color: grey;
+    font-size: 25px;
+    text-align: center;
+    padding: 3vh 0;
+    font-weight: lighter
+}
+
+.success .btn {
+    width: 100%;
+    background-color: rgb(29, 226, 226);
+    border-color: rgb(29, 226, 226);
+    border-radius: 25px;
+    color: white;
+    font-size: 20px
+}
+
+.success .btn:focus {
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none
+}
+
+.success .btn:hover {
+    color: white
+}
+.success .iconSuccess{
+    font-size: 40px;
+    text-align: center;
+    color: rgb(29, 226, 226);
+}
