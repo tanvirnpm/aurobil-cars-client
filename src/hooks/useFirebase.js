@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 initializeFirebase();
 const useFirebase = () => {
     const [user, setUser] = useState({})
+    const [isLoading, setIsLoading] = useState(false);
+    const [isRegSuccess, setIsRegSuccess] = useState(false);
     useEffect(() => {
         const getLocalStorageUser = JSON.parse(localStorage.getItem("loginUser"));
         // console.log(getLocalStorageUser);
@@ -15,6 +17,7 @@ const useFirebase = () => {
     const auth = getAuth();
     //   sign out function
     const logOutHandler = () => {
+        setIsLoading(false)
         signOut(auth)
           .then(() => {
             // Sign-out successful.
@@ -29,11 +32,13 @@ const useFirebase = () => {
 
     // user registration by email and password
     const registerUser = (email, password, name, history) => {
+        setIsLoading(true);
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 // Signed in 
                 const user = userCredential.user;
                 // ...
+                setIsRegSuccess(true)
                 updateProfile(auth.currentUser, {
                     displayName: name
                 }).then(() => {
@@ -43,8 +48,9 @@ const useFirebase = () => {
                     // An error occurred
                     // ...
                 });
-                savedUser(email, name, true, false, "POST")
-                history.replace('/');
+                savedUser(email, name, true, false, "POST");
+                
+                // history.replace('/login');
 
             })
             .catch((error) => {
@@ -52,11 +58,13 @@ const useFirebase = () => {
                 const errorMessage = error.message;
                 // ..
                 console.log('firebase error', error)
-            });
+            })
+            .finally(()=> setIsLoading(false))
     }
 
     // user login by email and password
     const loginUser = (email, password, location, history) => {
+        setIsLoading(true);
         let { from } = location.state || { from: { pathname: "/" } };
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -132,6 +140,8 @@ const useFirebase = () => {
         loginUser,
         user,
         savedUserInToLocalStorage,
+        isLoading,
+        isRegSuccess,
     }
 };
 

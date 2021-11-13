@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../../../FeedBack/Spinner';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 
 const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
+      const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         fetch('https://intense-dawn-68409.herokuapp.com/get-all-orders')
         .then(res=> res.json())
         .then(data => setOrders(data))
+        .finally(()=> setIsLoading(false))
     },[])
     // order status change to shipped
     const orderShipped = id => {
@@ -53,6 +56,9 @@ const ManageAllOrders = () => {
                             }
                         </tbody>
                     </table>
+                    {
+                        isLoading && <Spinner />
+                    }
                 </div>
             </div>
             {/* confirm modal */}

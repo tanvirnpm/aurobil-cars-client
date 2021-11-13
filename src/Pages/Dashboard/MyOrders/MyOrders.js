@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../../FeedBack/Spinner';
 import useAuth from '../../../hooks/useAuth';
 import DashboardMenu from '../Dashboard/DashboardMenu';
 
@@ -6,11 +7,13 @@ const MyOrders = () => {
     const { user } = useAuth();
     const [myOrders, setMyOrders] = useState([])
     const [deleteItem, setDeleteItem] = useState([])
-    useEffect(()=>{
+    const [isLoading, setIsLoading] = useState(true)
+    useEffect(() => {
         fetch(`https://intense-dawn-68409.herokuapp.com/get-order/${user.email}`)
-        .then(result => result.json())
-        .then(data => setMyOrders(data))
-    },[])
+            .then(result => result.json())
+            .then(data => setMyOrders(data))
+            .finally(() => setIsLoading(false))
+    }, [])
     const deleteItemById = (id) => {
         setDeleteItem(id);
     }
@@ -21,8 +24,8 @@ const MyOrders = () => {
                 'content-type': 'application/json'
             }
         })
-        .then(res=>res.json())
-        .then(data=>console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
     // console.log(deleteItem)
     return (
@@ -45,6 +48,7 @@ const MyOrders = () => {
                             </tr>
                         </thead>
                         <tbody>
+
                             {
                                 myOrders.map((item, index) => <tr key={index}>
                                     <th>{index + 1}</th>
@@ -54,11 +58,14 @@ const MyOrders = () => {
                                     <td>{item.car.color}</td>
                                     <td>{item.car.price} /-</td>
                                     <td>{item.status}</td>
-                                    {item.status == 'Pending' && <td><button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal" onClick={()=>deleteItemById(item._id)}>Delete</button></td>}
+                                    {item.status == 'Pending' && <td><button className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal" onClick={() => deleteItemById(item._id)}>Delete</button></td>}
                                 </tr>)
                             }
                         </tbody>
                     </table>
+                    {
+                        isLoading && <Spinner />
+                    }
                 </div>
             </div>
             {/* confirm modal */}
@@ -74,7 +81,7 @@ const MyOrders = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-danger" onClick={()=> orderDeleteById(deleteItem)}>Confirm Delete</button>
+                            <button type="button" className="btn btn-danger" onClick={() => orderDeleteById(deleteItem)}>Confirm Delete</button>
                         </div>
                     </div>
                 </div>

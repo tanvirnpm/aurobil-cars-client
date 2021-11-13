@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../../../FeedBack/Spinner';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 
 const ManageAdmin = () => {
     const [allUsers, setAllUsers] = useState([])
+      const [isLoading, setIsLoading] = useState(true)
     useEffect(()=>{
         fetch('https://intense-dawn-68409.herokuapp.com/get-user')
         .then(res=> res.json())
         .then(data => setAllUsers(data))
+        .finally(()=> setIsLoading(false))
     },[])
     // console.log('from mongodb: ', allUsers)
     
@@ -55,6 +58,9 @@ const ManageAdmin = () => {
                             }
                         </tbody>
                     </table>
+                    {
+                        isLoading && <Spinner />
+                    }
                 </div>
             </div>
         </div>

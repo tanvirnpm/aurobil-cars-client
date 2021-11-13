@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import Spinner from '../../../../FeedBack/Spinner';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 
 const ManageProducts = () => {
     const [products, setProducts] = useState([]);
-    const [deleteItem, setDeleteItem] = useState([])
-    useEffect(()=>{
+    const [deleteItem, setDeleteItem] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    useEffect(() => {
         fetch('https://intense-dawn-68409.herokuapp.com/get-all-products')
-        .then(res=>res.json())
-        .then(data=>setProducts(data))
-    },[])
+            .then(res => res.json())
+            .then(data => setProducts(data))
+            .finally(()=> setIsLoading(false))
+    }, [])
     // get delete product id
     const deleteItemById = (id) => {
         setDeleteItem(id);
@@ -21,8 +24,8 @@ const ManageProducts = () => {
                 'content-type': 'application/json'
             }
         })
-        .then(res=>res.json())
-        .then(data=>console.log(data))
+            .then(res => res.json())
+            .then(data => console.log(data))
     }
     return (
         <div className="container-fluid">
@@ -43,19 +46,22 @@ const ManageProducts = () => {
                         </thead>
                         <tbody>
                             {
-                                products.map((item,index)=> <tr key={index}>
-                                    <th>{index+1}</th>
+                                products.map((item, index) => <tr key={index}>
+                                    <th>{index + 1}</th>
                                     <td>{item.chassis}</td>
                                     <td>{item.make} {item.model}</td>
                                     <td>{item.year}</td>
                                     <td>{item.color}</td>
                                     <td>
-                                        <button onClick={()=>deleteItemById(item._id)} className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                                        <button onClick={() => deleteItemById(item._id)} className="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
                                     </td>
                                 </tr>)
                             }
                         </tbody>
                     </table>
+                    {
+                        isLoading && <Spinner />
+                    }
                 </div>
             </div>
             {/* confirm modal */}
@@ -71,7 +77,7 @@ const ManageProducts = () => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                            <button onClick={()=> productDeleteById(deleteItem)} type="button" className="btn btn-danger">Confirm Delete</button>
+                            <button onClick={() => productDeleteById(deleteItem)} type="button" className="btn btn-danger">Confirm Delete</button>
                         </div>
                     </div>
                 </div>

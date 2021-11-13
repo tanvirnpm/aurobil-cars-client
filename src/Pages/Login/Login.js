@@ -2,10 +2,10 @@ import React from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useAuth from '../../hooks/useAuth';
+import Spinner from '../../FeedBack/Spinner';
 
 const Login = () => {
-    const {user} = useAuth();
-    const { loginUser } = useAuth();
+    const {user, loginUser, isLoading} = useAuth();
     const location = useLocation();
     const history = useHistory();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -40,6 +40,9 @@ const Login = () => {
                                 <button type="submit" className="btn btn-info float-end">Login</button>
                             </div>
                         </form>
+                        {
+                            isLoading && <Spinner />
+                        }
                         <hr className="mt-4"/>
                         <div className="col-12">
                         <p className="text-center mb-0">Have not account yet? <Link to="/register">Signup</Link></p>
