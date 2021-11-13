@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const StockListCard = ({product}) => {
-    const {make, model, chassis, mileage, color, fuelType, grade, year, image} = product;
+    const {make, model, chassis, mileage, color, fuelType, grade, year, image, price} = product;
     return (
         <div className="col-md-4">
             <div className="card shadow-sm">
@@ -20,6 +20,7 @@ const StockListCard = ({product}) => {
                         <span className="badge bg-info text-white me-1">{fuelType}</span>
                         <span className="badge bg-info text-white me-1">{grade}</span>
                         <span className="badge bg-info text-white">{color}</span>
+                        <span className="badge bg-info text-white">{price} /-</span>
                     </div>
                     <div className="d-flex justify-content-center">
                         <Link to={`/product-details/${chassis}`} className="btn btn-outline-info btn-sm me-2">

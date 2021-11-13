@@ -7,7 +7,7 @@ const Pay = () => {
             <div className="row flex-nowrap">
                 <DashboardMenu />
                 <div className="col py-3">
-                    <h3>Payment integration comming soon...</h3>
+                    <h3>Payment system coming soon.</h3>
                 </div>
             </div>
         </div>
