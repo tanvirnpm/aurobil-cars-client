@@ -14,7 +14,7 @@ const ProductDetasils = () => {
         .then(res=> res.json())
         .then(data=> setProduct(data[0]));
     },[])
-    console.log(product.package)
+    // console.log(product.package)
     return (
         <div>
             <Navbar />

@@ -14,9 +14,11 @@ const Reviews = () => {
     <section className="container pt-5">
       <h1 className="text-center mb-4">Our Clients Review</h1>
       <div className="row g-3">
+        
         {reviews.map((item, index) => (
           <ReviewsCard key={index} item={item} />
         ))}
+        
       </div>
     </section>
   );

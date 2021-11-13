@@ -33,7 +33,7 @@ const Login = () => {
                             <div className="col-12">
                                 <div className="form-check">
                                     <input className="form-check-input" type="checkbox" id="rememberMe"/>
-                                    <label class ="form-check-label" for="rememberMe"> Remember me</label>
+                                    <label className="form-check-label" htmlFor="rememberMe"> Remember me</label>
                                 </div>
                             </div>
                             <div className="col-12">
@@ -41,8 +41,8 @@ const Login = () => {
                             </div>
                         </form>
                         <hr className="mt-4"/>
-                        <div class ="col-12">
-                        <p class ="text-center mb-0">Have not account yet? <Link to="/register">Signup</Link></p>
+                        <div className="col-12">
+                        <p className="text-center mb-0">Have not account yet? <Link to="/register">Signup</Link></p>
                         </div>
                     </div>
                 </div>

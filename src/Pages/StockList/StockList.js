@@ -10,7 +10,7 @@ const StockList = () => {
         .then(res=>res.json())
         .then(data=>setAllProducts(data))
     },[])
-    console.log(allProdutcs)
+    // console.log(allProdutcs)
     return (
         <div>
             <Navbar/>
@@ -18,7 +18,7 @@ const StockList = () => {
                 <h1 className="text-center mb-4">Update Stock List</h1>
                 <div className="row g-3">
                     {
-                        allProdutcs.map(product=> <StockListCard product={product}/>)
+                        allProdutcs.map((product, index)=> <StockListCard key={index} product={product}/>)
                     }
                 </div>
             </div>

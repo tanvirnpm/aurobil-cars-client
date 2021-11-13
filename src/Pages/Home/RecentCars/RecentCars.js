@@ -13,7 +13,7 @@ const RecentCars = () => {
       <h1 className="mb-4 text-center text-md-start">Recent Car's</h1>
       <div className="row g-3">
         {
-          allProdutcs.slice(0,6).map(product => <RecentCarsCard product={product} />)
+          allProdutcs.slice(0,6).map((product, index) => <RecentCarsCard key={index} product={product} />)
         }
       </div>
     </section>

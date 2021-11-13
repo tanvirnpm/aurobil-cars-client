@@ -24,7 +24,7 @@ const MyOrders = () => {
         .then(res=>res.json())
         .then(data=>console.log(data))
     }
-    console.log(deleteItem)
+    // console.log(deleteItem)
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -62,7 +62,7 @@ const MyOrders = () => {
                 </div>
             </div>
             {/* confirm modal */}
-            <div className="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">

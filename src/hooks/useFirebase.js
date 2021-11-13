@@ -24,7 +24,7 @@ const useFirebase = () => {
           .catch((error) => {
             // An error happened.
           });
-          console.log('logout done')
+        //   console.log('logout done')
       };
 
     // user registration by email and password

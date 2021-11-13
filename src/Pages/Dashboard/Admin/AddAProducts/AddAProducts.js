@@ -45,57 +45,57 @@ const AddAProducts = () => {
                                 <div className="row g-3">
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("make")}>
-                                            <option selected>Select Make</option>
+                                            <option >Select Make</option>
                                             {
-                                                carSpecifications.make.map((item, index)=><option key={index} value={item}>{item}</option>)
+                                                carSpecifications.make.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("model")}>
-                                            <option selected>Select Model</option>
+                                            <option >Select Model</option>
                                             {
-                                                carSpecifications.model.map(item=><option value={item}>{item}</option>)
+                                                carSpecifications.model.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("package")}>
-                                            <option selected>Select Package</option>
+                                            <option >Select Package</option>
                                             {
-                                                carSpecifications.package.map(item=><option value={item}>{item}</option>)
+                                                carSpecifications.package.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("year")}>
-                                            <option selected>Select Year</option>
+                                            <option >Select Year</option>
                                             {
-                                                carSpecifications.year.map(item=><option value={item}>{item}</option>)
+                                                carSpecifications.year.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("color")}>
-                                            <option selected>Select Color</option>
+                                            <option >Select Color</option>
                                             {
-                                                carSpecifications.color.map(item=><option value={item}>{item}</option>)
+                                                carSpecifications.color.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("fuelType")}>
-                                            <option selected>Select Fuel</option>
+                                            <option >Select Fuel</option>
                                             {
-                                                carSpecifications.fuelType.map(item=><option value={item}>{item}</option>)
+                                                carSpecifications.fuelType.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>
                                     <div className="col-lg-3 col-md-4 col-sm-6">
                                         <select className="form-select" {...register("grade")}>
-                                            <option selected>Select Grade</option>
+                                            <option >Select Grade</option>
                                             {
-                                                carSpecifications.grade.map(item=><option value={item}>{item}</option>)
+                                                carSpecifications.grade.map((item, index)=><option key={index} defaultValue={item}>{item}</option>)
                                             }
                                         </select>
                                     </div>

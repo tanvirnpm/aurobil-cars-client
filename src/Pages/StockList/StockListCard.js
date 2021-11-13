@@ -19,7 +19,7 @@ const StockListCard = ({product}) => {
                         <span className="badge bg-info text-white me-1">{mileage} km</span>
                         <span className="badge bg-info text-white me-1">{fuelType}</span>
                         <span className="badge bg-info text-white me-1">{grade}</span>
-                        <span className="badge bg-info text-white">{color}</span>
+                        <span className="badge bg-info text-white me-1">{color}</span>
                         <span className="badge bg-info text-white">{price} /-</span>
                     </div>
                     <div className="d-flex justify-content-center">

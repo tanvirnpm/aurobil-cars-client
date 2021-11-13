@@ -19,7 +19,7 @@ const ManageAllOrders = () => {
         .then(res=>res.json())
         .then(result => console.log(result))
     }
-    console.log(orders)
+    // console.log(orders)
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -56,7 +56,7 @@ const ManageAllOrders = () => {
                 </div>
             </div>
             {/* confirm modal */}
-            <div className="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal fade" id="confirmModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">

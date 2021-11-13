@@ -24,7 +24,7 @@ const Review = () => {
     };
     const rating = (event, newValue) => {
         setRatingValue(newValue);
-        console.log(newValue)
+        // console.log(newValue)
     }
 
     return (

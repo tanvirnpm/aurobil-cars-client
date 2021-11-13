@@ -12,7 +12,7 @@ const Register = () => {
         if(data.password === data.confirmPassword){
             registerUser(data.email, data.password, data.name, history)
         }else{
-            console.log('Password did not match.')
+            // console.log('Password did not match.')
         }
     };
     

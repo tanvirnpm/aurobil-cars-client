@@ -9,27 +9,27 @@ const SmallSearchPanel = () => {
         <div className="bg-white border rounded py-3 px-4 shadow-sm">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <select className="form-control mb-2" {...register("make")}>
-                    <option selected>Make</option>
-                    <option value="Honda">Honda</option>
-                    <option value="Mazda">Mazda</option>
-                    <option value="Nissan">Nissan</option>
+                    <option defaultValue="Make">Make</option>
+                    <option defaultValue="Honda">Honda</option>
+                    <option defaultValue="Mazda">Mazda</option>
+                    <option defaultValue="Nissan">Nissan</option>
                 </select>
                 <select className="form-control mb-2" {...register("model")}>
-                    <option selected>Model</option>
-                    <option value="Allion">Allion</option>
-                    <option value="Premio">Premio</option>
-                    <option value="Aqua">Aqua</option>
+                    <option defaultValue="Model">Model</option>
+                    <option defaultValue="Allion">Allion</option>
+                    <option defaultValue="Premio">Premio</option>
+                    <option defaultValue="Aqua">Aqua</option>
                 </select>
                 <select className="form-control mb-2" {...register("fuelType")}>
-                    <option selected>Fuel Type</option>
-                    <option value="Hybrid">Hybrid</option>
-                    <option value="Non Hybrid">Non Hybrid</option>
+                    <option defaultValue="Fuel Type">Fuel Type</option>
+                    <option defaultValue="Hybrid">Hybrid</option>
+                    <option defaultValue="Non Hybrid">Non Hybrid</option>
                 </select>
                 <select className="form-control mb-2" {...register("color")}>
-                    <option selected>Color</option>
-                    <option value="Wine">Wine</option>
-                    <option value="Blue">Blue</option>
-                    <option value="Black">Black</option>
+                    <option defaultValue="Color">Color</option>
+                    <option defaultValue="Wine">Wine</option>
+                    <option defaultValue="Blue">Blue</option>
+                    <option defaultValue="Black">Black</option>
                 </select>
                 <div className="row">
                     <div className="col-md-6">
@@ -43,7 +43,7 @@ const SmallSearchPanel = () => {
 
                 <div className="d-flex justify-content-between align-items-center">
                     <Link to="/search" className="text-info">Advance Search</Link>
-                    <input className="btn btn-outline-info" value="Search" type="submit" />
+                    <input className="btn btn-outline-info" defaultValue="Search" type="submit" />
                 </div>
             </form>
         </div>
