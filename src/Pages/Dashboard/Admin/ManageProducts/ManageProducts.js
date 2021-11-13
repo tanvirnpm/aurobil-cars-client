@@ -11,7 +11,7 @@ const ManageProducts = () => {
             .then(res => res.json())
             .then(data => setProducts(data))
             .finally(()=> setIsLoading(false))
-    }, [])
+    }, [products])
     // get delete product id
     const deleteItemById = (id) => {
         setDeleteItem(id);

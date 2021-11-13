@@ -9,14 +9,14 @@ const MyOrders = () => {
     const [myOrders, setMyOrders] = useState([]);
     const [deleteItem, setDeleteItem] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [isDeleteSuccess, setIsDeleteSuccess] = useState(false)
+    const [isDeleteSuccess, setIsDeleteSuccess] = useState(false);
     const history = useHistory();
     useEffect(() => {
         fetch(`https://intense-dawn-68409.herokuapp.com/get-order/${user.email}`)
             .then(result => result.json())
             .then(data => setMyOrders(data))
             .finally(() => setIsLoading(false))
-    }, [])
+    }, [myOrders])
     const deleteItemById = (id) => {
         setDeleteItem(id);
     }
@@ -29,6 +29,10 @@ const MyOrders = () => {
         })
         .then(res => res.json())
         .then(data => setIsDeleteSuccess(data.acknowledged))
+        fetch(`https://intense-dawn-68409.herokuapp.com/get-order/${user.email}`)
+        .then(result => result.json())
+        .then(data => setMyOrders(data))
+        .finally(() => setIsLoading(false))
     }
     // console.log(deleteItem)
     isDeleteSuccess && history.replace('/my-orders')

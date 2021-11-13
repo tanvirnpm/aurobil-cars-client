@@ -10,7 +10,7 @@ const ManageAdmin = () => {
         .then(res=> res.json())
         .then(data => setAllUsers(data))
         .finally(()=> setIsLoading(false))
-    },[])
+    },[allUsers])
     // console.log('from mongodb: ', allUsers)
     
     // make admin

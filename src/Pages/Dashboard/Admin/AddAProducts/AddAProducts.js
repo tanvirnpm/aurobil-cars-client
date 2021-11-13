@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import DashboardMenu from '../../Dashboard/DashboardMenu';
 import { useForm } from "react-hook-form";
 import useAuth from '../../../../hooks/useAuth';
+import { useHistory } from 'react-router';
 
 const AddAProducts = () => {
     const { user } = useAuth();
+    const history = useHistory();
 
     const carSpecifications = {
         make: ['Toyota', 'Nissan', 'Honda', 'Mazda'],
@@ -31,7 +33,7 @@ const AddAProducts = () => {
             body: JSON.stringify(newCar)
         })
         .then(result => result.json())
-        .then(data=>console.log('after added product', data))
+        .then(data=>data.acknowledged && history.replace('/manage-product'))
     };
     return (
         <div className="container-fluid">

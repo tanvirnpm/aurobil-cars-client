@@ -10,7 +10,7 @@ const ManageAllOrders = () => {
             .then(res => res.json())
             .then(data => setOrders(data))
             .finally(() => setIsLoading(false))
-    }, [])
+    }, [orders])
     // order status change to shipped
     const orderShipped = id => {
         fetch(`https://intense-dawn-68409.herokuapp.com/order/shipped/${id}`, {
