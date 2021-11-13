@@ -12,7 +12,7 @@ const Purchase = () => {
     const {make, model, price, image, grade, mileage, fuelType, year, color} = product;
     const { chassis } = useParams();
     useEffect(()=>{
-        fetch(`http://localhost:5000/get-product/${chassis}`)
+        fetch(`https://intense-dawn-68409.herokuapp.com/get-product/${chassis}`)
         .then(res=> res.json())
         .then(data=> setProduct(data[0]));
     },[])
@@ -21,7 +21,7 @@ const Purchase = () => {
         const newOrder = data;
         newOrder.car = product;
         newOrder.status = 'Pending';
-        fetch('http://localhost:5000/make-order',{
+        fetch('https://intense-dawn-68409.herokuapp.com/make-order',{
             method: "POST",
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(data)

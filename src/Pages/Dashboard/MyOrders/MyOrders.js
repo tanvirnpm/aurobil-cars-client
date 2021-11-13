@@ -7,7 +7,7 @@ const MyOrders = () => {
     const [myOrders, setMyOrders] = useState([])
     const [deleteItem, setDeleteItem] = useState([])
     useEffect(()=>{
-        fetch(`http://localhost:5000/get-order/${user.email}`)
+        fetch(`https://intense-dawn-68409.herokuapp.com/get-order/${user.email}`)
         .then(result => result.json())
         .then(data => setMyOrders(data))
     },[])
@@ -15,7 +15,7 @@ const MyOrders = () => {
         setDeleteItem(id);
     }
     const orderDeleteById = id => {
-        fetch(`http://localhost:5000/delete-order/${id}`, {
+        fetch(`https://intense-dawn-68409.herokuapp.com/delete-order/${id}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

@@ -4,13 +4,13 @@ import DashboardMenu from '../../Dashboard/DashboardMenu';
 const ManageAllOrders = () => {
     const [orders, setOrders] = useState([]);
     useEffect(()=>{
-        fetch('http://localhost:5000/get-all-orders')
+        fetch('https://intense-dawn-68409.herokuapp.com/get-all-orders')
         .then(res=> res.json())
         .then(data => setOrders(data))
     },[])
     // order status change to shipped
     const orderShipped = id => {
-        fetch(`http://localhost:5000/order/shipped/${id}`,{
+        fetch(`https://intense-dawn-68409.herokuapp.com/order/shipped/${id}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

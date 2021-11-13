@@ -5,7 +5,7 @@ const ManageProducts = () => {
     const [products, setProducts] = useState([]);
     const [deleteItem, setDeleteItem] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/get-all-products')
+        fetch('https://intense-dawn-68409.herokuapp.com/get-all-products')
         .then(res=>res.json())
         .then(data=>setProducts(data))
     },[])
@@ -15,7 +15,7 @@ const ManageProducts = () => {
     }
     // products delete function
     const productDeleteById = id => {
-        fetch(`http://localhost:5000/delete-product/${id}`, {
+        fetch(`https://intense-dawn-68409.herokuapp.com/delete-product/${id}`, {
             method: "POST",
             headers: {
                 'content-type': 'application/json'

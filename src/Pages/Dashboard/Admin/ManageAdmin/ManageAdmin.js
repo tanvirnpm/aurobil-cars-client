@@ -4,7 +4,7 @@ import DashboardMenu from '../../Dashboard/DashboardMenu';
 const ManageAdmin = () => {
     const [allUsers, setAllUsers] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/get-user')
+        fetch('https://intense-dawn-68409.herokuapp.com/get-user')
         .then(res=> res.json())
         .then(data => setAllUsers(data))
     },[])
@@ -12,7 +12,7 @@ const ManageAdmin = () => {
     
     // make admin
     const makeAdmin = email => {
-        fetch(`http://localhost:5000/make/admin/${email}`,{
+        fetch(`https://intense-dawn-68409.herokuapp.com/make/admin/${email}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

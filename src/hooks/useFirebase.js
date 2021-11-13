@@ -64,7 +64,7 @@ const useFirebase = () => {
                 // const user = { email, name }
                 // ...
                 
-                fetch(`http://localhost:5000/get-user/${userEmail}`)
+                fetch(`https://intense-dawn-68409.herokuapp.com/get-user/${userEmail}`)
                 .then(result => result.json())
                 .then(data => {
                     // console.log(data[0].email)
@@ -95,7 +95,7 @@ const useFirebase = () => {
             admin: adminRole,
             image: 'https://image.flaticon.com/icons/png/512/206/206853.png'
         }
-        fetch('http://localhost:5000/user', {
+        fetch('https://intense-dawn-68409.herokuapp.com/user', {
             method: method,
             headers: {
                 'content-type': 'application/json'

@@ -13,7 +13,7 @@ const RecentCarsCard = ({ product }) => {
           className="card-img-top"
         />
         <div className="card-body">
-          <h5 className="card-title text-center">Toyota C-HR</h5>
+          <h5 className="card-title text-center">{meke} {model} {fuelType}</h5>
           <div className="d-flex justify-content-center mb-2">
             <span className="badge bg-info text-white me-1">{year}</span>
             <span className="badge bg-info text-white me-1">{mileage} km</span>

@@ -6,7 +6,7 @@ import StockListCard from './StockListCard';
 const StockList = () => {
     const [allProdutcs, setAllProducts] = useState([])
     useEffect(()=>{
-        fetch('http://localhost:5000/get-all-products')
+        fetch('https://intense-dawn-68409.herokuapp.com/get-all-products')
         .then(res=>res.json())
         .then(data=>setAllProducts(data))
     },[])

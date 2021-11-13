@@ -14,7 +14,7 @@ const Review = () => {
         const newReview = data;
         newReview.image = user.image;
         newReview.rating = ratingValue;
-        fetch('http://localhost:5000/add-review', {
+        fetch('https://intense-dawn-68409.herokuapp.com/add-review', {
             method: "POST",
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(data)

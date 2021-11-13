@@ -23,7 +23,7 @@ const AddAProducts = () => {
             email: user.email,
             name: user.name
         };
-        fetch('http://localhost:5000/add-product',{
+        fetch('https://intense-dawn-68409.herokuapp.com/add-product',{
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

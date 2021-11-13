@@ -10,7 +10,7 @@ const ProductDetasils = () => {
     const {make, model, price, image, grade, mileage, fuelType, year, color} = product;
     const { chassis } = useParams();
     useEffect(()=>{
-        fetch(`http://localhost:5000/get-product/${chassis}`)
+        fetch(`https://intense-dawn-68409.herokuapp.com/get-product/${chassis}`)
         .then(res=> res.json())
         .then(data=> setProduct(data[0]));
     },[])
