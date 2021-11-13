@@ -36,6 +36,7 @@ const Purchase = () => {
             })
         // console.log(data)
     };
+    
     const redirectToOrder = () => {
         history.replace('/my-orders')
     }

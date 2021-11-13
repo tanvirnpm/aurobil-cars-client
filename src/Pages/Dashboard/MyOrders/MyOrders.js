@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import Spinner from '../../../FeedBack/Spinner';
 import useAuth from '../../../hooks/useAuth';
 import DashboardMenu from '../Dashboard/DashboardMenu';
 
 const MyOrders = () => {
     const { user } = useAuth();
-    const [myOrders, setMyOrders] = useState([])
-    const [deleteItem, setDeleteItem] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
+    const [myOrders, setMyOrders] = useState([]);
+    const [deleteItem, setDeleteItem] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [isDeleteSuccess, setIsDeleteSuccess] = useState(false)
+    const history = useHistory();
     useEffect(() => {
         fetch(`https://intense-dawn-68409.herokuapp.com/get-order/${user.email}`)
             .then(result => result.json())
@@ -24,10 +27,11 @@ const MyOrders = () => {
                 'content-type': 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(data => console.log(data))
+        .then(res => res.json())
+        .then(data => setIsDeleteSuccess(data.acknowledged))
     }
     // console.log(deleteItem)
+    isDeleteSuccess && history.replace('/my-orders')
     return (
         <div className="container-fluid">
             <div className="row flex-nowrap">
@@ -73,15 +77,18 @@ const MyOrders = () => {
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Confirmation</h5>
+                            {isDeleteSuccess == false && <h5 className="modal-title" id="exampleModalLabel">Confirmation</h5>}
+                            {isDeleteSuccess && <h5 className="modal-title" id="exampleModalLabel">Deleted</h5>}
                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div className="modal-body">
-                            <p>Do You Really Want to Delete This ?</p>
+                            {isDeleteSuccess == false &&  <p>Do You Really Want to Delete This ?</p>}
+                            {isDeleteSuccess &&  <p className="text-success">Delete Success Fully</p>}
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-danger" onClick={() => orderDeleteById(deleteItem)}>Confirm Delete</button>
+                            {isDeleteSuccess == false &&  <button type="button" className="btn btn-info" data-bs-dismiss="modal">Cancel</button>}
+                            {isDeleteSuccess &&  <button type="button" className="btn btn-info" data-bs-dismiss="modal">Close</button>}
+                            {isDeleteSuccess == false && <button type="button" className="btn btn-danger" onClick={() => orderDeleteById(deleteItem)}>Confirm Delete</button>}
                         </div>
                     </div>
                 </div>
